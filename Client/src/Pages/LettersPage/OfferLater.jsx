@@ -1,8 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Modal from 'react-modal';
-import headerImg from '../LettersPage/headeimgpng.png'
+import imgS from '../../assets/images/CEOSignature.png'
+import axios from 'axios'
 
-function OfferLater() {
+
+const OfferLater = () => {
+
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [position, setPosition] = useState('');
@@ -14,6 +17,35 @@ function OfferLater() {
   const [jobResponsibilities, setJobResponsibilities] = useState(['']);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const previewRef = useRef();
+  const [letterData, setLetterData] = useState(
+    {
+      name,
+      offerReleaseDate,
+      joiningDate: date,
+      designation: position,
+
+    }
+  )
+
+  const handleSaveInfo = async () => {
+    
+    try {
+      const response = await axios.post('http://localhost:8000/api/saveOfferLetter', letterData);
+      console.log(response.data, 'here data');
+      if (response.status === 200) {
+        console.log(response.data);
+        console.log('Employee Letter Info Save');
+      } else {
+        console.log('Failled to save leeter info...');
+      }
+    } catch (error) {
+      console.log('here is a error ', error);
+    }
+  };
+
+  // const handleChange = () =>{
+
+  // }
 
   const handleJobResponsibilitiesChange = (index, value) => {
     const updatedResponsibilities = [...jobResponsibilities];
@@ -61,6 +93,18 @@ function OfferLater() {
         margin-bottom: 10px;
         margin-left: 10px;
       }
+      .signature-img{
+        padding-top: 1rem;
+        margin-left: 3rem;
+        width: 8rem;
+
+      }
+      .ceo-head{
+        font-weight: bold;
+      }
+      .headName{
+        margin-left: 4rem;
+      }
       .print-header h1 {
         font-size: 24px;
         margin: 0;
@@ -71,6 +115,9 @@ function OfferLater() {
         }
       .print-content p {
         margin: 10px 0;
+      }
+      .heading-letter{
+      padding-top: 4.5rem;
       }
         
       .print-content p span {
@@ -83,58 +130,54 @@ function OfferLater() {
       .print-content ul li {
         margin: 5px 0;
       }
-      .ceo-head{
-      padding-top: 5rem;
-      font-weight: bold;
-      }
       .header-side {
           transform: rotate(180deg);
           display: flex;
           align-items: end;
           width: 100%;
           height: 150px; /* Adjust height as needed */
-          position: relative;
-          background: white;
           margin-bottom: 2rem;
+          position: absolute;
+          background: transparent;
       }
           .he {
           
-      top: 100px;
+            top: 100px;
 
           }
       .footer-side {
           display: flex;
           align-items: baseline;
           width: 100%;
-          height: 150px; /* Adjust height as needed */
-          position: relative;
-          background: white;
+          height: 4rem;
+          position: absolute;
+          background: transparent;
+          bottom: 0;
       }
 
       .left-green {
-          width: 60%;
-          background-color: #006838;
-          height: 30%;
-          clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
-          z-index: 999;
+        width: 28rem;
+        background-color: #006838;
+        height: 0.7rem;
+        clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
+        z-index: 999;
       }
       .left-white {
-      width: 65%;
-      position: absolute;
-      bottom: 58px;
-      z-index: 999;
-      background-color: #ffffff;
-      height: 55%;
-      clip-path: polygon(0 0, 84% 0, 100% 100%, 0% 100%);
+        // width: 32.5rem;
+        // position: absolute;
+        // bottom: 9px;
+        // z-index: 999;
+        // background-color: #ffff;
+        // height: 3rem;
+        // clip-path: polygon(0 0, 75% 0, 100% 100%, 0% 100%);
       }
 
       .right-red {
-          margin-left: -14rem;
-        
-          width: 70%;
-          background-color: #ee1c25;
-          height: 40%;
-          clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+        margin-left: -14rem;
+        width: 36rem;
+        background-color: #ee1c25;
+        height: 0.7rem;
+        clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
       }
     `);
     printWindow.document.write('</style>');
@@ -146,6 +189,16 @@ function OfferLater() {
     printWindow.document.close();
     printWindow.print();
   };
+
+
+  useEffect(() => {
+    setLetterData({
+      name,
+      offerReleaseDate,
+      joiningDate: date,
+      designation: position,
+    });
+  }, [name, offerReleaseDate, date, position]);
 
   return (
     <div className="container mx-auto p-4">
@@ -249,7 +302,7 @@ function OfferLater() {
             Add Job Responsibility
           </button>
         </div>
-        <button type="button" onClick={openModal} className=" border border-gray-950 text-black py-2 px-4 rounded">
+        <button type="button" onClick={openModal} className=" border border-gray-950 text-black py-2 px-4 rounded" >
           Preview Offer Letter
         </button>
       </form>
@@ -265,18 +318,18 @@ function OfferLater() {
               <div className="right-red"></div>
             </div>
 
-            <h1 className="text-xl font-bold text-center">OFFER LETTER</h1>
+            <h1 className="text-xl font-bold pt-7 text-center heading-letter">OFFER LETTER</h1>
           </div>
           <img src="https://doaguru.com/static/media/doagurulogo-removebg.b0126812bbe704a27f8f.webp" alt="Logo" className='w-24 logo-header' />
           <div className="print-content">
-            <p>1815, Wright Town, Jabalpur<br />Madhya Pradesh, 482002<br /><a href="http://www.doaguru.com" target='_blank'>www.doaguru.com</a></p>
+            <p>1815, Wright Town, Jabalpur<br />Madhya Pradesh, 482002<br /><a href="http://www.doaguru.com" target='_blank' className='text-blue-900'>www.doaguru.com</a></p>
             <div className='release-date flex justify-end'>
 
-              <p>Offer Release Date: {offerReleaseDate}</p>
+              <p className='font-bold'><span>Offer Release Date: {offerReleaseDate}</span></p>
             </div>
             <p>Dear {name},</p>
-            <p>Congratulations! We are pleased to offer you the position of {position} at DOAGuru Infosystems. Your skills, experience, and enthusiasm align perfectly with our company’s goals and vision, and we believe you will make a valuable addition to our team.</p>
-            <p>Joining Date: {date}</p>
+            <p>Congratulations! We are pleased to offer you the position of <span className='font-bold'>{position} </span> at DOAGuru Infosystems. Your skills, experience, and enthusiasm align perfectly with our company’s goals and vision, and we believe you will make a valuable addition to our team.</p>
+            <p><span className='font-bold'>Joining Date: {date}</span></p>
             <p><span className='font-bold'> Salary:</span> {salary} INR Per Month</p>
             <p><span className='font-bold'>Benefits:</span> {benefits}</p>
             <p><span className='font-bold'>Office Timings:</span> {officeTimings}</p>
@@ -288,9 +341,10 @@ function OfferLater() {
               ))}
             </ul>
             <p>Finally, we welcome you to DOAGuru InfoSystems and hope that your tenure with us will be long and beneficial. If you have any queries regarding the contents of this letter or the enclosed documents, please do not hesitate to contact the HR Team: info@doaguru.com.</p>
-            <p>Please confirm your acceptance of this offer by [2 Days].</p>
+            <p>Please confirm your acceptance of this offer by 2 Days.</p>
             <p>We look forward to having you as part of our team.</p>
-            <p className='mt-28 font-bold ceo-head'>R.S.Pandey<br />(CEO) DOAGuru InfoSystems.</p>
+            <img src={imgS} alt="Signature" className='w-28 ms-14 mt-4 signature-img' />
+            <p className='mt-1 font-bold ceo-head'><span className='headName ms-16'>R.S.Pandey</span><br />(CEO) DOAGuru InfoSystems.</p>
           </div>
           <div className="footer-side mt-28">
             <div className="left-white"></div>
@@ -299,7 +353,7 @@ function OfferLater() {
             <div className="right-red"></div>
           </div>
         </div>
-        <button onClick={handlePrint} className="bg-blue-500 text-white py-2 px-4 rounded mt-4">Print Offer Letter</button>
+        <button onClick={()=>{ handleSaveInfo(handlePrint());}} className="bg-blue-500 text-white py-2 px-4 rounded mt-4">Print Offer Letter</button>
         <button onClick={closeModal} className="bg-red-500 text-white py-2 px-4 rounded mt-4 ml-2">Close</button>
       </Modal>
     </div>

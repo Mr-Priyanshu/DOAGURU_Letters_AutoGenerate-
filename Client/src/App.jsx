@@ -4,6 +4,7 @@ import Navbar from "./Components/navbar";
 
 import Footer from "./Components/footer";
 import OfferLater from "./Pages/LettersPage/OfferLater";
+import ViewOfferLettersPage from "./Pages/LettersPage/ViewLetters";
 
 
 const App = () =>{
@@ -18,7 +19,8 @@ const App = () =>{
 
     <Routes>
       {/* <Route path="/" element={<Home/>} /> */}
-      <Route path="/" element={<OfferLater/>} />
+      <Route path="/LetterGenrate" element={<OfferLater/>} />
+      <Route path="/" element={<ViewOfferLettersPage/>} />
 
     </Routes>
 
