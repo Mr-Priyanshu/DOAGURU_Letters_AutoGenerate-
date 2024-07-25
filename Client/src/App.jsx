@@ -14,11 +14,12 @@ const App = () =>{
     <main className="flex flex-col min-h-screen ">
       {/* //Navbar  */}
       <Navbar/>
-      {/* -------------------- */}
 
+      {/* -------------------- */}
 
     <Routes>
       {/* <Route path="/" element={<Home/>} /> */}
+      
       <Route path="/LetterGenrate" element={<OfferLater/>} />
       <Route path="/" element={<ViewOfferLettersPage/>} />
 

@@ -31,6 +31,12 @@ const ViewOfferLettersPage = () => {
             <th className="border-b px-4 py-2">Offer Release Date</th>
             <th className="border-b px-4 py-2">Joining Date</th>
             <th className="border-b px-4 py-2">Designation</th>
+            <th className="border-b px-4 py-2">Designation</th>
+            <th className="border-b px-4 py-2">Designation</th>
+            <th className="border-b px-4 py-2">Designation</th>
+            <th className="border-b px-4 py-2">Designation</th>
+            <th className="border-b px-4 py-2">Designation</th>
+            <th className="border-b px-4 py-2">Designation</th>
             <th className="border-b px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -40,6 +46,12 @@ const ViewOfferLettersPage = () => {
               <td className="border-b px-4 py-2">{letter.name}</td>
               <td className="border-b px-4 py-2">{letter.offerReleaseDate}</td>
               <td className="border-b px-4 py-2">{letter.joiningDate}</td>
+              <td className="border-b px-4 py-2">{letter.designation}</td>
+              <td className="border-b px-4 py-2">{letter.designation}</td>
+              <td className="border-b px-4 py-2">{letter.designation}</td>
+              <td className="border-b px-4 py-2">{letter.designation}</td>
+              <td className="border-b px-4 py-2">{letter.designation}</td>
+              <td className="border-b px-4 py-2">{letter.designation}</td>
               <td className="border-b px-4 py-2">{letter.designation}</td>
               <td className="border-b px-4 py-2">
                 <button

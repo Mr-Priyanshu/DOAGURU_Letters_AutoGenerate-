@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 db = require('../Config/DB')
 const {
-  saveOfferLetter,
+  // saveOfferLetter,
   getOfferLetters,
   downloadPdf,
-} = require('../Controller/Controller')
+} = require('../Controller/Controller');
+const { saveOfferLetter } = require('../Controller/PdfController');
 
 
 

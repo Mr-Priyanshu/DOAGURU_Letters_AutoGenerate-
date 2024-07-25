@@ -16,7 +16,7 @@ import { Link } from "react-router-dom"
 // import TaskView from "../pages/Employee/taskShow"
 
 const navigation = [
-  { name: 'Dashboard', href: '', current: true },
+  { name: 'Dashboard', href: '/LetterGenrate', current: true },
   { name: 'Letters', href: '', current: true },
   { name: 'Request', href: '#', current: false },
   { name: 'Report', href: '#', current: false },

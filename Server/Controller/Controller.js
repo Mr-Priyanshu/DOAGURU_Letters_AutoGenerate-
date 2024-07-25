@@ -4,7 +4,7 @@ const path = require('path');
 // Save offer letter details
 const saveOfferLetter = (req, res) => {
   const { name, offerReleaseDate, joiningDate, designation } = req.body;
-  const pdfPath = path.join(__dirname, 'pdfs', `${name}_offer_letter.pdf`);
+  const pdfPath = path.join(__dirname, 'upload', `${name}_offer_letter.pdf`);
 
   // pdf ki path save krna he database me
   const query = 'INSERT INTO offer_letters (name, offerReleaseDate, joiningDate, designation, pdfPath) VALUES (?, ?, ?, ?, ?)';

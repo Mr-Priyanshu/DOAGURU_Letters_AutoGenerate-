@@ -23,17 +23,23 @@ const OfferLater = () => {
       offerReleaseDate,
       joiningDate: date,
       designation: position,
-
+      salary,
+      benefits,
+      officeTimings,
+      noticePeriod,
+      jobResponsibilities,
     }
   )
 
   const handleSaveInfo = async () => {
     
     try {
+
       const response = await axios.post('http://localhost:8000/api/saveOfferLetter', letterData);
       console.log(response.data, 'here data');
       if (response.status === 200) {
         console.log(response.data);
+        handlePrint();
         console.log('Employee Letter Info Save');
       } else {
         console.log('Failled to save leeter info...');
@@ -47,7 +53,7 @@ const OfferLater = () => {
 
   // }
 
-  const handleJobResponsibilitiesChange = (index, value) => {
+    const handleJobResponsibilitiesChange = (index, value) => {
     const updatedResponsibilities = [...jobResponsibilities];
     updatedResponsibilities[index] = value;
     setJobResponsibilities(updatedResponsibilities);
@@ -189,16 +195,27 @@ const OfferLater = () => {
     printWindow.document.close();
     printWindow.print();
   };
-
-
   useEffect(() => {
     setLetterData({
       name,
       offerReleaseDate,
       joiningDate: date,
       designation: position,
+      salary,
+      benefits,
+      officeTimings,
+      noticePeriod,
+      jobResponsibilities,
     });
-  }, [name, offerReleaseDate, date, position]);
+  }, [     name,
+    offerReleaseDate,
+    date,
+    position,
+    salary,
+    benefits,
+    officeTimings,
+    noticePeriod,
+    jobResponsibilities,]);
 
   return (
     <div className="container mx-auto p-4">
@@ -353,7 +370,7 @@ const OfferLater = () => {
             <div className="right-red"></div>
           </div>
         </div>
-        <button onClick={()=>{ handleSaveInfo(handlePrint());}} className="bg-blue-500 text-white py-2 px-4 rounded mt-4">Print Offer Letter</button>
+        <button onClick={()=>  handleSaveInfo() } className="bg-blue-500 text-white py-2 px-4 rounded mt-4">Print Offer Letter</button>
         <button onClick={closeModal} className="bg-red-500 text-white py-2 px-4 rounded mt-4 ml-2">Close</button>
       </Modal>
     </div>
