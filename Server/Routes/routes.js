@@ -7,8 +7,10 @@ const {
   downloadPdf,
 } = require('../Controller/Controller');
 const { saveOfferLetter } = require('../Controller/PdfController');
+const { RegisterAuth, LoginAuth } = require('../Controller/Auth');
 
-
+router.post('/api/register', RegisterAuth);
+router.post('/api/login', LoginAuth);
 
 router.post('/api/saveOfferLetter', saveOfferLetter);
 router.get('/api/getOfferLetters', getOfferLetters);

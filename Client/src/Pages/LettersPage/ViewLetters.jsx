@@ -7,7 +7,7 @@ const ViewOfferLettersPage = () => {
   useEffect(() => {
     const fetchOfferLetters = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/getOfferLetters');
+        const response = await axios.get('https://my-letter.doaguru.com/api/getOfferLetters');
         setOfferLetters(response.data);
       } catch (error) {
         console.error('Failed to fetch offer letters:', error);
@@ -18,7 +18,7 @@ const ViewOfferLettersPage = () => {
   }, []);
 
   const handleDownload = (id) => {
-    window.open(`http://localhost:8000/api/downloadPdf/${id}`, '_blank');
+    window.open(`https://my-letter.doaguru.com/api/downloadPdf/${id}`, '_blank');
   };
 
   return (

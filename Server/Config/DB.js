@@ -13,7 +13,7 @@ connecion.connect((err )=>{
     console.error('Here DB ERROR',err);
     return
   } else{
-    console.log('YES DB Connected (*_*) Name>>>>>:', db.config.database);
+    console.log('YES DB Connected (*_*) DB-Name>>>>>:', db.config.database);
   }
 })
 

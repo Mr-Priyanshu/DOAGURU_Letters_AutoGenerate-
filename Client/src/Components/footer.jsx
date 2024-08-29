@@ -6,7 +6,7 @@ import CLogo from "../assets/images/CLogo.png"
 function Footer() {
   return (
     <>
-      <footer className=" bg-white rounded-lg shadow dark:bg-white-900 m-4 ">
+      <footer className=" bg-white rounded-lg shadow dark:bg-white-900  mt-auto m-4 ">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <Link to="https://doaguru.com/" target="_blank" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">

@@ -7,6 +7,7 @@ import axios from 'axios'
 const OfferLater = () => {
 
   const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [date, setDate] = useState('');
   const [position, setPosition] = useState('');
   const [salary, setSalary] = useState('');
@@ -28,6 +29,7 @@ const OfferLater = () => {
       officeTimings,
       noticePeriod,
       jobResponsibilities,
+      phoneNumber,
     }
   )
 
@@ -35,7 +37,7 @@ const OfferLater = () => {
     
     try {
 
-      const response = await axios.post('http://localhost:8000/api/saveOfferLetter', letterData);
+      const response = await axios.post('https://my-letter.doaguru.com/api/saveOfferLetter', letterData);
       console.log(response.data, 'here data');
       if (response.status === 200) {
         console.log(response.data);
@@ -82,7 +84,7 @@ const OfferLater = () => {
         margin: 0;
         padding: 20px;
       }
-      .print-container {
+      .print-container {s
         max-width: 800px;
         margin: auto;
       }
@@ -206,8 +208,10 @@ const OfferLater = () => {
       officeTimings,
       noticePeriod,
       jobResponsibilities,
+      phoneNumber,
     });
-  }, [     name,
+  }, [
+    name,
     offerReleaseDate,
     date,
     position,
@@ -215,7 +219,9 @@ const OfferLater = () => {
     benefits,
     officeTimings,
     noticePeriod,
-    jobResponsibilities,]);
+    jobResponsibilities,
+    phoneNumber,
+  ]);
 
   return (
     <div className="container mx-auto p-4">
@@ -232,6 +238,16 @@ const OfferLater = () => {
             required
           />
         </div>
+        {/* <div className="mb-4">
+          <label className="block text-gray-700">Mobile Number</label>
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mt-1"
+            required
+          />
+        </div> */}
 
         <div className="mb-4">
           <label className="block text-gray-700">Date</label>
